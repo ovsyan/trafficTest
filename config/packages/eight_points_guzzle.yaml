@@ -1,0 +1,15 @@
+# EightPoints GuzzleBundle
+# A full list of configuration options can be found here:
+# https://github.com/8p/EightPointsGuzzleBundle/blob/master/src/Resources/doc/configuration-reference.md
+eight_points_guzzle:
+    logging: true
+    clients:
+        mindbox_crm_client:
+            class: App\Client\MindBoxCrmApiClient
+            base_url: "%env(MINDBOX_BASE_URL)%"
+#TODO            handler: 'GuzzleHttp\Handler\MockHandler'
+            options:
+                headers:
+                    Accept: "application/json"
+                    Content-type: "application/json"
+                    Authorization: 'Mindbox secretKey="%env(MINDBOX_SECRET)%"'

@@ -1,0 +1,33 @@
+{
+  'customer': {
+    'ids': {
+      'bitrixId': '346257'
+    },
+    'mobilePhone': '79374134389',
+    'fullName': 'Петров Иван',
+    'email': 'pivan@mindbox.ru',
+    'password': 'Qwerty',
+    'customFields': {
+      'city': 'Mосква',
+      'b2b': true,
+      'childrenNames': [
+        'Маша',
+        'Петя'
+      ]
+    },
+    'subscriptions': [
+      {
+        'pointOfContact': 'Sms',
+        'topic': 'SweetsOfLife',
+        'isSubscribed': false,
+        'valueByDefault': true
+      },
+      {
+        'pointOfContact': 'Email',
+        'topic': 'NewGossips',
+        'isSubscribed': true,
+        'valueByDefault': true
+      }
+    ]
+  }
+}
