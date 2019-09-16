@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Client\MindBoxCrmApiClient;
 use App\Form\RegistrationType;
 use App\Model\CustomerModel;
 use App\Model\CustomersModel;
+use App\Service\MindBoxService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +26,10 @@ class DefaultController extends Controller
     /**
      * @Route(path="/register",name="register")
      * @param Request $request
-     * @param MindBoxCrmApiClient $apiClient
+     * @param MindBoxService $mindBoxService
      * @return Response
      */
-    public function registerAction(Request $request, MindBoxCrmApiClient $apiClient)
+    public function registerAction(Request $request, MindBoxService $mindBoxService)
     {
         $form = $this->createForm(RegistrationType::class);
         $form->handleRequest($request);
@@ -47,10 +47,14 @@ class DefaultController extends Controller
                 $customer->setCustomField($field['name'], $field['value']);
             }
             $customers->setCustomer($customer);
-            $apiClient->postOperation('register', $customers);
+            $mindBoxService->asyncRegister($customers);
         }
-        return $this->render('register.html.twig', [
-            'form' => $form->createView()
-        ]);
+
+        return $this->render(
+            'register.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }
