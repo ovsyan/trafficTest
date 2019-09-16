@@ -25,7 +25,7 @@ MINDBOX_SECRET=YOUR_SECRET
 php bin/console server:run
 ``
 
-#### Работа без загушек
+#### Работа без заглушек
 
 Проект использует заглушки для тестирования работы приложения без аутентификационных данных от mindBox.
 Чтобы работать с боевыми данными, следует:
@@ -82,9 +82,7 @@ class MindBoxCrmApiClient extends Client
 ...
 ```
 
-
-
-##Просмотр запросов
+## Просмотр запросов
 
 Для отладки запроса, есть возможность ознакомиться с ним в [symfony profiler](https://symfony.com/doc/current/profiler.html)
 
@@ -93,7 +91,7 @@ class MindBoxCrmApiClient extends Client
 ![Alt text](public/img/debug.png?raw=true "debug") 
 
 
-##Разработано с помощью
+## Разработано с помощью
 
 * [Symfony 4](https://symfony.com)
 * [EightPointsGuzzleBundle](https://packagist.org/packages/eightpoints/guzzle-bundle) (included by composer)
