@@ -28,6 +28,7 @@ class DefaultController extends Controller
      * @param Request $request
      * @param MindBoxService $mindBoxService
      * @return Response
+     * @throws \Exception
      */
     public function registerAction(Request $request, MindBoxService $mindBoxService)
     {
