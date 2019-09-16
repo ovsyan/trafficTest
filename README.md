@@ -25,10 +25,75 @@ MINDBOX_SECRET=YOUR_SECRET
 php bin/console server:run
 ``
 
+#### Работа без загушек
+
+Проект использует заглушки для тестирования работы приложения без аутентификационных данных от mindBox.
+Чтобы работать с боевыми данными, следует:
+
+* удалить из **config/packages/eight_points_guzzle.yaml** **MockHandler**
+```yaml
+eight_points_guzzle:
+    clients:
+        mindbox_crm_client:
+            handler: 'GuzzleHttp\Handler\MockHandler' #remove me
+```
+
+* Очистить или закомментировать **MockHandler** из **src/Client/MindBoxCrmApiClient.php**
+
+```php
+
+namespace App\Client;
+...
+class MindBoxCrmApiClient extends Client
+...
+        $mock = new MockHandler(
+            [
+                new Response(200, ['Content-Type' => 'application/json'], json_encode(['status' => 'Success'])),
+                new Response(
+                    200, ['Content-Type' => 'application/json'], json_encode(
+                        [
+                            'status' => 'ValidationError',
+                            'validationMessages' => [
+                                [
+                                    'message' => 'Потребитель с таким адресом электронной почты уже зарегистрирован',
+                                    'location' => '/operation/customer/email',
+                                ],
+                                [
+                                    'message' => 'Потребитель с таким мобильным телефоном уже зарегистрирован',
+                                    'location' => '/operation/customer/mobilePhone',
+                                ],
+                            ],
+                        ]
+                    )
+                ),
+            ]
+        );
+
+        $handler = HandlerStack::create($mock);
+...
+//также необходимо убрать handler из запросов клиента
+            $promise = $this->requestAsync(
+                'POST',
+                ...
+                [
+                    'handler' => $handler,
+                    ...
+                ]
+...
+```
+
+
+
 ##Просмотр запросов
+
 Для отладки запроса, есть возможность ознакомиться с ним в [symfony profiler](https://symfony.com/doc/current/profiler.html)
-![Alt text](public/img/debug.png?raw=true "debug")
+
+***не работает с MockHandler***
+
+![Alt text](public/img/debug.png?raw=true "debug") 
+
 
 ##Разработано с помощью
+
 * [Symfony 4](https://symfony.com)
 * [EightPointsGuzzleBundle](https://packagist.org/packages/eightpoints/guzzle-bundle) (included by composer)

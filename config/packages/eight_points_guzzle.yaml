@@ -7,7 +7,7 @@ eight_points_guzzle:
         mindbox_crm_client:
             class: App\Client\MindBoxCrmApiClient
             base_url: "%env(MINDBOX_BASE_URL)%"
-#TODO            handler: 'GuzzleHttp\Handler\MockHandler'
+            handler: 'GuzzleHttp\Handler\MockHandler'
             options:
                 headers:
                     Accept: "application/json"
