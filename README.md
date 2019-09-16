@@ -24,3 +24,11 @@ MINDBOX_SECRET=YOUR_SECRET
 ``
 php bin/console server:run
 ``
+
+##Просмотр запросов
+Для отладки запроса, есть возможность ознакомиться с ним в [symfony profiler](https://symfony.com/doc/current/profiler.html)
+![Alt text](public/img/debug.png?raw=true "debug")
+
+##Разработано с помощью
+* [Symfony 4](https://symfony.com)
+* [EightPointsGuzzleBundle](https://packagist.org/packages/eightpoints/guzzle-bundle) (included by composer)
